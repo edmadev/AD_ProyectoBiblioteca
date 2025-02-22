@@ -13,7 +13,9 @@ import com.mycompany.biblioteca.models.Usuario;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -613,5 +615,162 @@ public class DML {
             }
         }
         return filasAfectadas;
+    }
+    
+    public ArrayList<Libro>listaLibros(){
+        ArrayList<Libro> listaLibros = new ArrayList<Libro>();
+        PreparedStatement ps = null;
+        ResultSet rs =null;
+        try{
+            
+            String consulta = "SELECT * FROM libros";
+            ps = conexion.prepareStatement(consulta);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                //int idLibro = rs.getInt("id_libro");
+                String tituloLibro = rs.getString("titulo_libro");
+                String autorLibro = rs.getString("autor");
+                String generoLibro = rs.getString("genero");
+                int añoLibro = rs.getInt("año_publicacion");
+                Libro libro = new Libro(tituloLibro, autorLibro, generoLibro, añoLibro);
+                listaLibros.add(libro);
+            }
+        }catch(SQLException ex){
+            System.err.println("ERROR AL LISTAR LOS LIBROS: " +ex.getMessage());
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (Exception e) {
+                    System.out.println("Error al cerrar PreparedStatement: " + e.getMessage());
+                }
+            }
+
+            if (rs != null) {
+                try {
+                    ps.close();
+                } catch (Exception e) {
+                    System.out.println("Error al cerrar ResultSet: " + e.getMessage());
+                }
+            }
+        }
+        return listaLibros;
+    }
+    public ArrayList<Usuario>listaUsuarios(){
+        ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
+        PreparedStatement ps = null;
+        ResultSet rs =null;
+        try{
+            
+            String consulta = "SELECT * FROM usuarios";
+            ps = conexion.prepareStatement(consulta);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                
+                String nombre = rs.getString("nombre_usuario");
+                String email = rs.getString("email");
+                String tipo = rs.getString("tipo_usuario");
+                int tfno = rs.getInt("telefono");
+                Usuario usuario = new Usuario(nombre, email, tipo, tfno);
+                listaUsuarios.add(usuario);
+            }
+        }catch(SQLException ex){
+            System.err.println("ERROR AL LISTAR LOS USUARIOS: " +ex.getMessage());
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (Exception e) {
+                    System.out.println("Error al cerrar PreparedStatement: " + e.getMessage());
+                }
+            }
+
+            if (rs != null) {
+                try {
+                    ps.close();
+                } catch (Exception e) {
+                    System.out.println("Error al cerrar ResultSet: " + e.getMessage());
+                }
+            }
+        }
+        return listaUsuarios;
+    }
+    public ArrayList<Evento>listaEventos(){
+        ArrayList<Evento> listaEventos = new ArrayList<Evento>();
+        PreparedStatement ps = null;
+        ResultSet rs =null;
+        try{
+            
+            String consulta = "SELECT * FROM eventos";
+            ps = conexion.prepareStatement(consulta);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                
+                String nombre = rs.getString("evento");
+                Date fecha = rs.getDate("fecha_evento");
+                String descripcion = rs.getString("descipcion");
+                
+                Evento evento = new Evento(nombre, fecha, descripcion);
+                listaEventos.add(evento);
+            }
+        }catch(SQLException ex){
+            System.err.println("ERROR AL LISTAR LOS EVENTOS: " +ex.getMessage());
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (Exception e) {
+                    System.out.println("Error al cerrar PreparedStatement: " + e.getMessage());
+                }
+            }
+
+            if (rs != null) {
+                try {
+                    ps.close();
+                } catch (Exception e) {
+                    System.out.println("Error al cerrar ResultSet: " + e.getMessage());
+                }
+            }
+        }
+        return listaEventos;
+    }
+    public ArrayList<Prestamo>listaPrestamos(){
+        ArrayList<Prestamo> listaPrestamos = new ArrayList<Prestamo>();
+        PreparedStatement ps = null;
+        ResultSet rs =null;
+        try{
+            
+            String consulta = "SELECT * FROM prestamos";
+            ps = conexion.prepareStatement(consulta);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                //int idLibro = rs.getInt("id_libro");
+                
+                Date fechaPres = rs.getDate("fecha_prestamo");
+                Date fechaDev = rs.getDate("fecha_limite_devolucion");
+                
+                Prestamo prestamo = new Prestamo(fechaPres, fechaDev);
+                listaPrestamos.add(prestamo);
+            }
+        }catch(SQLException ex){
+            System.err.println("ERROR AL LISTAR LOS LIBROS: " +ex.getMessage());
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (Exception e) {
+                    System.out.println("Error al cerrar PreparedStatement: " + e.getMessage());
+                }
+            }
+
+            if (rs != null) {
+                try {
+                    ps.close();
+                } catch (Exception e) {
+                    System.out.println("Error al cerrar ResultSet: " + e.getMessage());
+                }
+            }
+        }
+        return listaPrestamos;
     }
 }

@@ -32,6 +32,7 @@
                   <Component id="btnEventos" max="32767" attributes="0"/>
                   <Component id="btnConfiguracion" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnMultas" alignment="1" max="32767" attributes="0"/>
+                  <Component id="btnTablas" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="pnInsertarVentana" max="32767" attributes="0"/>
@@ -57,9 +58,11 @@
               <Component id="btnEventos" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnMultas" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btnTablas" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="185" max="32767" attributes="0"/>
               <Component id="btnConfiguracion" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="207" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
@@ -143,6 +146,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMultasActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnTablas">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tablas"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTablasActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
