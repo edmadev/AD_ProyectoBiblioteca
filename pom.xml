@@ -32,6 +32,16 @@
             <artifactId>mongodb-driver-sync</artifactId>
             <version>5.3.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.18.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>4.0.5</version>
+        </dependency>
     </dependencies>
     <name>AD_BibliotecaGarciaEdwinHerranJavier</name>
 </project>

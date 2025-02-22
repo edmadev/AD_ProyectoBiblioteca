@@ -28,6 +28,7 @@ public class DML {
 
     private Connection conexion;
 
+    //añadi el parametro conexion pero hay que probarlo
     public DML() {
         this.conexion = new Conexion().conectar();
     }
