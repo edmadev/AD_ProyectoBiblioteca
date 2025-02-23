@@ -10,6 +10,7 @@ import com.mycompany.biblioteca.models.Multa;
 import com.mycompany.biblioteca.models.Participacion;
 import com.mycompany.biblioteca.models.Prestamo;
 import com.mycompany.biblioteca.models.Usuario;
+import com.mycompany.biblioteca.utils.ConversorCSV;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -772,5 +773,36 @@ public class DML {
             }
         }
         return listaPrestamos;
+    }
+    
+    public int insertarUsuarioArchivo(String ruta){
+        ConversorCSV conversor = new ConversorCSV();
+        int numeroFilas = conversor.obtenerNumeroFilas(ruta);
+        String[][] tabla = conversor.conversorCSV(ruta, numeroFilas);
+        PreparedStatement ps = null;
+        
+        int filasInsertadas = 0;
+        try{
+            String consulta = "INSERT INTO usuarios(nombre_usuario,email,tipo_usuario,telefono) VALUES (?,?,?,?)";
+            ps = conexion.prepareStatement(consulta);
+            for (String[] fila : tabla) {
+                ps.setString(1, fila[0]);
+                ps.setString(2, fila[1]);
+                ps.setString(3, fila[2]);
+                ps.setInt(4, Integer.parseInt(fila[3]));
+                
+        }
+        }catch(SQLException ex){
+            System.err.println("ERROR AL INSERTAR");
+        }finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (Exception e) {
+                    System.out.println("Error al cerrar PreparedStatement: " + e.getMessage());
+                }
+            }
+        }
+        return filasInsertadas;
     }
 }

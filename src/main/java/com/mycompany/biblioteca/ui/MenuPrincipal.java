@@ -21,6 +21,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     VentanaPrestamos vP = new VentanaPrestamos();
     VentanaEventos vE = new VentanaEventos();
     VentanaTablas vT = new VentanaTablas();
+    VentanaConfiguracion vConfiguracion = new VentanaConfiguracion();
 
     public MenuPrincipal() {
         initComponents();
@@ -79,6 +80,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
 
         btnConfiguracion.setText("Configuracion");
+        btnConfiguracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfiguracionActionPerformed(evt);
+            }
+        });
 
         pnInsertarVentana.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -188,6 +194,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         establecerDimensionesPanelExterno(vT);
         insertarVentana(vT);
     }//GEN-LAST:event_btnTablasActionPerformed
+
+    private void btnConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfiguracionActionPerformed
+        // TODO add your handling code here:
+        establecerDimensionesPanelExterno(vConfiguracion);
+        insertarVentana(vConfiguracion);
+    }//GEN-LAST:event_btnConfiguracionActionPerformed
 
     /**
      * @param args the command line arguments

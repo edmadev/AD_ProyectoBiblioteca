@@ -19,27 +19,37 @@
           <Group type="102" alignment="1" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="tfFechaPrestamo" alignment="0" pref="120" max="32767" attributes="0"/>
-                          <Component id="lblFechaPrestamo" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblNombre" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="spnLibro" alignment="0" max="32767" attributes="0"/>
-                      </Group>
+                      <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+                      <Component id="jcPrestamo" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="295" max="-2" attributes="0"/>
-                      <Component id="btnAceptar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblFechaPrestamo" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblNombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="spnLibro" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="62" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="lblFechaDevolucion" alignment="0" max="32767" attributes="0"/>
-                  <Component id="lblUsuario" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfFechaDevolucion" max="32767" attributes="0"/>
-                  <Component id="spnUsuario" max="32767" attributes="0"/>
+              <EmptySpace pref="26" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblFechaDevolucion" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jcDevolucion" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="lblMulta" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="btnAceptar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="lblMultaRes" min="-2" pref="31" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Component id="spnUsuario" min="-2" pref="109" max="-2" attributes="0"/>
+                  <Component id="lblUsuario" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="162" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -54,7 +64,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="spnLibro" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="spnUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="spnUsuario" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -62,20 +72,30 @@
                   <Component id="lblFechaDevolucion" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="tfFechaPrestamo" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                  <Component id="tfFechaDevolucion" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jcPrestamo" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcDevolucion" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="13" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="lblMulta" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblMultaRes" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnAceptar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-              <Component id="btnAceptar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="63" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="tfFechaPrestamo">
-    </Component>
     <Component class="javax.swing.JLabel" name="lblNombre">
       <Properties>
         <Property name="text" type="java.lang.String" value="Id libro"/>
@@ -104,8 +124,6 @@
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAceptarMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfFechaDevolucion">
-    </Component>
     <Component class="javax.swing.JSpinner" name="spnLibro">
       <Properties>
         <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
@@ -119,6 +137,20 @@
           <SpinnerModel initial="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMulta">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Multa"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMultaRes">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0.00"/>
+      </Properties>
+    </Component>
+    <Component class="com.toedter.calendar.JCalendar" name="jcPrestamo">
+    </Component>
+    <Component class="com.toedter.calendar.JCalendar" name="jcDevolucion">
     </Component>
   </SubComponents>
 </Form>
