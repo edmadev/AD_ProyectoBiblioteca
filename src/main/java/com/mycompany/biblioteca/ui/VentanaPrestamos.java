@@ -18,7 +18,7 @@ public class VentanaPrestamos extends javax.swing.JPanel {
      */
     ventanaAñadirPrestamo vAñadir = new ventanaAñadirPrestamo();
     ventanaEliminarPrestamo vEliminar = new ventanaEliminarPrestamo();
-    //ventanaModificarPrestamo vModificar = new ventanaModificarLibro();
+    ventanaModificarPrestamo vModificar = new ventanaModificarPrestamo();
     public VentanaPrestamos() {
         initComponents();
     }
@@ -114,8 +114,8 @@ public class VentanaPrestamos extends javax.swing.JPanel {
 
     private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
         // TODO add your handling code here:
-//        DimensionesPanel(vModificar);
-//        insertarVentana(vModificar);
+            DimensionesPanel(vModificar);
+            insertarVentana(vModificar);
     }//GEN-LAST:event_btnModificarMouseClicked
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
