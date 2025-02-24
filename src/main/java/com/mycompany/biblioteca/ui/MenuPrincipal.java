@@ -4,6 +4,7 @@
  */
 package com.mycompany.biblioteca.ui;
 
+import com.mycompany.biblioteca.DAO.relacional.DML;
 import java.awt.BorderLayout;
 import static java.awt.image.ImageObserver.WIDTH;
 import javax.swing.JPanel;
@@ -27,9 +28,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     VentanaPrestamos vP = new VentanaPrestamos();
     VentanaEventos vE = new VentanaEventos();
     VentanaTablas vT = new VentanaTablas();
-        DefaultPieDataset dataset = new DefaultKeyedValuesDataset();
-
+    DefaultPieDataset dataset = new DefaultKeyedValuesDataset();
     VentanaConfiguracion vConfiguracion = new VentanaConfiguracion();
+    DML consultas = new DML();
 
     public MenuPrincipal() {
         initComponents();
@@ -221,7 +222,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConfiguracionActionPerformed
 
     private void btnGraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficaActionPerformed
-       cargarGrafica();
+        cargarGrafica();
     }//GEN-LAST:event_btnGraficaActionPerformed
 
     /**
@@ -272,18 +273,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
         panel.setSize(900, 480);
         panel.setLocation(0, 0);
     }
-    
+
     private void cargarGrafica() {
-        dataset.setValue("Estudiante", Double.valueOf(10));
-        dataset.setValue("Profesor", Double.valueOf(1));
-        dataset.setValue("Externo", Double.valueOf(1));
+        dataset.setValue("Alumnos", (double)consultas.numeroTipo("Alumno"));
+        dataset.setValue("Profesores", (double)consultas.numeroTipo("Profesor"));
+        dataset.setValue("Externos", (double)consultas.numeroTipo("Externo"));
         JFreeChart chart = ChartFactory.createPieChart("Distribución de usuarios", dataset, true, true, true);
         ChartFrame frame = new ChartFrame("Distribución de usuarios", chart);
         frame.pack();
         frame.setVisible(true);
     }
 
-
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfiguracion;

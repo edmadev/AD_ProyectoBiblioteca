@@ -6,7 +6,6 @@ package com.mycompany.biblioteca.DAO.relacional;
 
 import com.mycompany.biblioteca.models.Evento;
 import com.mycompany.biblioteca.models.Libro;
-import com.mycompany.biblioteca.models.Multa;
 import com.mycompany.biblioteca.models.Participacion;
 import com.mycompany.biblioteca.models.Prestamo;
 import com.mycompany.biblioteca.models.Usuario;
@@ -19,9 +18,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-
-
 
 /**
  *
@@ -36,7 +32,6 @@ public class DML {
         this.conexion = new Conexion().conectar();
     }
 
-    
     public int registrarLibro(String titulo, String autor, String genero, int año) {
         PreparedStatement ps = null;
         int filas = 0;
@@ -101,13 +96,6 @@ public class DML {
         return actualizado;
     }
 
-    
-    
-    
-    
-    
-    
-    
     public int eliminarLibro(String titulo) {
         PreparedStatement ps = null;
         int filas = 0;
@@ -132,9 +120,6 @@ public class DML {
         return filas;
     }
 
-    
-    
-    
     public int registrarUsuario(String nombre, String email, String tipo, int telefono) {
         PreparedStatement ps = null;
         int filas = 0;
@@ -308,7 +293,7 @@ public class DML {
         return filas;
     }
 
-    public int registrarPrestamo(int usuario,int libro, Date Fprestamo, Date Fdevolucion,double multa) {
+    public int registrarPrestamo(int usuario, int libro, Date Fprestamo, Date Fdevolucion, double multa) {
         PreparedStatement ps = null;
         int filas = 0;
         /*No tengo del todo claro si la multa la metes manualmente, haces un metodo para calcularla
@@ -316,9 +301,9 @@ public class DML {
         try {
             String consulta = "INSERT INTO prestamos (id_usuario,id_libro,fecha_prestamo,fecha_limite_devolucion,multa) VALUES (?,?,?,?,?)";
             ps = conexion.prepareStatement(consulta);
-            ps.setInt(1,usuario);
+            ps.setInt(1, usuario);
             ps.setInt(2, libro);
-            ps.setDate(3,Fprestamo);
+            ps.setDate(3, Fprestamo);
             ps.setDate(4, Fdevolucion);
             ps.setDouble(5, multa);
             filas = ps.executeUpdate();
@@ -337,6 +322,7 @@ public class DML {
         }
         return filas;
     }
+
     /*public int registrarPrestamo(Prestamo prestamo) {
         PreparedStatement ps = null;
         int filas = 0;
@@ -364,9 +350,8 @@ public class DML {
         }
         return filas;
     }*/
+    public boolean actualizarPrestamo(int idPrestamo, int usuario, int libro, Date Fprestamo, Date Fdevolucion) {
 
-    public boolean actualizarPrestamo(int idPrestamo,int usuario,int libro, Date Fprestamo, Date Fdevolucion) {
-        
         PreparedStatement ps = null;
         boolean actualizacionExitosa = false;
         int filasActualizadas;
@@ -398,6 +383,7 @@ public class DML {
         }
         return actualizacionExitosa;
     }
+
     /*public boolean actualizarPrestamo(Prestamo prestamo) {
         PreparedStatement ps = null;
         boolean actualizacionExitosa = false;
@@ -432,7 +418,7 @@ public class DML {
         return actualizacionExitosa;
     }*/
 
-    /*public boolean actualizarMulta(Prestamo prestamo){
+ /*public boolean actualizarMulta(Prestamo prestamo){
         PreparedStatement ps = null;
         boolean actualizacionExitosa = false;
         int filasActualizadas;
@@ -488,61 +474,59 @@ public class DML {
         return filasInsertadas;
     }
 
-    public int actualizarMulta(Multa multa) {
-        PreparedStatement ps = null;
-        boolean actualizacionExitosa = false;
-        int filasAfectadas = 0;
-        String consulta = "UPDATE multas SET id_prestamo = ?,monto_multa = ? WHERE id_multa = ?";
-        try {
-            ps = conexion.prepareStatement(consulta);
-            ps.setInt(1, multa.getIdPrestamo());
-            ps.setDouble(2, multa.getMontoMulta());
-            ps.setInt(3, multa.getIdMulta());
-            filasAfectadas = ps.executeUpdate();
-            if (filasAfectadas > 0) {
-                System.out.println("Actualizacion exitosa");
-                actualizacionExitosa = true;
-            } else {
-                System.out.println("No se ha encontrado la multa con id: " + multa.getIdMulta());
-            }
-            System.out.println("Filas insertadas: " + filasAfectadas);
-        } catch (SQLException ex) {
-            System.err.println("Error al insertar multa: " + ex.toString());
-        } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException ex) {
-                    System.err.println("Error al cerrar PS: " + ex.getMessage());
-                }
-            }
-        }
-        return filasAfectadas;
-    }
-
-    public int eliminarMulta(Multa multa) {
-        PreparedStatement ps = null;
-        int filasAfectadas = 0;
-        try {
-            String consulta = "DELETE FROM multas WHERE id_multa = ?";
-            ps = conexion.prepareStatement(consulta);
-            ps.setInt(1, multa.getIdMulta());
-            filasAfectadas = ps.executeUpdate();
-            System.out.println("Filas eliminadas: " + filasAfectadas);
-        } catch (SQLException ex) {
-            System.err.println("Error al elimnar fila de multa: " + ex.getMessage());
-        } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException ex) {
-                    System.err.println("Error al cerrar ps: " + ex.getMessage());
-                }
-            }
-        }
-        return filasAfectadas;
-    }
-
+//    public int actualizarMulta(Multa multa) {
+//        PreparedStatement ps = null;
+//        boolean actualizacionExitosa = false;
+//        int filasAfectadas = 0;
+//        String consulta = "UPDATE multas SET id_prestamo = ?,monto_multa = ? WHERE id_multa = ?";
+//        try {
+//            ps = conexion.prepareStatement(consulta);
+//            ps.setInt(1, multa.getIdPrestamo());
+//            ps.setDouble(2, multa.getMontoMulta());
+//            ps.setInt(3, multa.getIdMulta());
+//            filasAfectadas = ps.executeUpdate();
+//            if (filasAfectadas > 0) {
+//                System.out.println("Actualizacion exitosa");
+//                actualizacionExitosa = true;
+//            } else {
+//                System.out.println("No se ha encontrado la multa con id: " + multa.getIdMulta());
+//            }
+//            System.out.println("Filas insertadas: " + filasAfectadas);
+//        } catch (SQLException ex) {
+//            System.err.println("Error al insertar multa: " + ex.toString());
+//        } finally {
+//            if (ps != null) {
+//                try {
+//                    ps.close();
+//                } catch (SQLException ex) {
+//                    System.err.println("Error al cerrar PS: " + ex.getMessage());
+//                }
+//            }
+//        }
+//        return filasAfectadas;
+//    }
+//    public int eliminarMulta(Multa multa) {
+//        PreparedStatement ps = null;
+//        int filasAfectadas = 0;
+//        try {
+//            String consulta = "DELETE FROM multas WHERE id_multa = ?";
+//            ps = conexion.prepareStatement(consulta);
+//            ps.setInt(1, multa.getIdMulta());
+//            filasAfectadas = ps.executeUpdate();
+//            System.out.println("Filas eliminadas: " + filasAfectadas);
+//        } catch (SQLException ex) {
+//            System.err.println("Error al elimnar fila de multa: " + ex.getMessage());
+//        } finally {
+//            if (ps != null) {
+//                try {
+//                    ps.close();
+//                } catch (SQLException ex) {
+//                    System.err.println("Error al cerrar ps: " + ex.getMessage());
+//                }
+//            }
+//        }
+//        return filasAfectadas;
+//    }
     public int registrarParticipacion(Participacion participacion) {
         PreparedStatement ps = null;
         int filasAfectadas = 0;
@@ -606,31 +590,31 @@ public class DML {
             ps = conexion.prepareStatement(consulta);
             ps.setInt(1, participacion.getIdParticipacion());
             filasAfectadas = ps.executeUpdate();
-            System.out.println("Numero de filas borradas: "+filasAfectadas);
+            System.out.println("Numero de filas borradas: " + filasAfectadas);
         } catch (SQLException ex) {
-            System.err.println("Error al borrar participacion: "+ex.getMessage());
-        }finally{
-            if (ps!=null){
+            System.err.println("Error al borrar participacion: " + ex.getMessage());
+        } finally {
+            if (ps != null) {
                 try {
                     ps.close();
                 } catch (SQLException ex) {
-                    System.err.println("Error al cerrar ps: "+ex.getMessage());
+                    System.err.println("Error al cerrar ps: " + ex.getMessage());
                 }
             }
         }
         return filasAfectadas;
     }
-    
-    public ArrayList<Libro>listaLibros(){
+
+    public ArrayList<Libro> listaLibros() {
         ArrayList<Libro> listaLibros = new ArrayList<Libro>();
         PreparedStatement ps = null;
-        ResultSet rs =null;
-        try{
-            
+        ResultSet rs = null;
+        try {
+
             String consulta = "SELECT * FROM libros";
             ps = conexion.prepareStatement(consulta);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 //int idLibro = rs.getInt("id_libro");
                 String tituloLibro = rs.getString("titulo_libro");
                 String autorLibro = rs.getString("autor");
@@ -639,8 +623,8 @@ public class DML {
                 Libro libro = new Libro(tituloLibro, autorLibro, generoLibro, añoLibro);
                 listaLibros.add(libro);
             }
-        }catch(SQLException ex){
-            System.err.println("ERROR AL LISTAR LOS LIBROS: " +ex.getMessage());
+        } catch (SQLException ex) {
+            System.err.println("ERROR AL LISTAR LOS LIBROS: " + ex.getMessage());
         } finally {
             if (ps != null) {
                 try {
@@ -660,17 +644,18 @@ public class DML {
         }
         return listaLibros;
     }
-    public ArrayList<Usuario>listaUsuarios(){
+
+    public ArrayList<Usuario> listaUsuarios() {
         ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
         PreparedStatement ps = null;
-        ResultSet rs =null;
-        try{
-            
+        ResultSet rs = null;
+        try {
+
             String consulta = "SELECT * FROM usuarios";
             ps = conexion.prepareStatement(consulta);
             rs = ps.executeQuery();
-            while(rs.next()){
-                
+            while (rs.next()) {
+
                 String nombre = rs.getString("nombre_usuario");
                 String email = rs.getString("email");
                 String tipo = rs.getString("tipo_usuario");
@@ -678,8 +663,8 @@ public class DML {
                 Usuario usuario = new Usuario(nombre, email, tipo, tfno);
                 listaUsuarios.add(usuario);
             }
-        }catch(SQLException ex){
-            System.err.println("ERROR AL LISTAR LOS USUARIOS: " +ex.getMessage());
+        } catch (SQLException ex) {
+            System.err.println("ERROR AL LISTAR LOS USUARIOS: " + ex.getMessage());
         } finally {
             if (ps != null) {
                 try {
@@ -699,26 +684,27 @@ public class DML {
         }
         return listaUsuarios;
     }
-    public ArrayList<Evento>listaEventos(){
+
+    public ArrayList<Evento> listaEventos() {
         ArrayList<Evento> listaEventos = new ArrayList<Evento>();
         PreparedStatement ps = null;
-        ResultSet rs =null;
-        try{
-            
+        ResultSet rs = null;
+        try {
+
             String consulta = "SELECT * FROM eventos";
             ps = conexion.prepareStatement(consulta);
             rs = ps.executeQuery();
-            while(rs.next()){
-                
+            while (rs.next()) {
+
                 String nombre = rs.getString("evento");
                 Date fecha = rs.getDate("fecha_evento");
                 String descripcion = rs.getString("descipcion");
-                
+
                 Evento evento = new Evento(nombre, fecha, descripcion);
                 listaEventos.add(evento);
             }
-        }catch(SQLException ex){
-            System.err.println("ERROR AL LISTAR LOS EVENTOS: " +ex.getMessage());
+        } catch (SQLException ex) {
+            System.err.println("ERROR AL LISTAR LOS EVENTOS: " + ex.getMessage());
         } finally {
             if (ps != null) {
                 try {
@@ -738,26 +724,27 @@ public class DML {
         }
         return listaEventos;
     }
-    public ArrayList<Prestamo>listaPrestamos(){
+
+    public ArrayList<Prestamo> listaPrestamos() {
         ArrayList<Prestamo> listaPrestamos = new ArrayList<Prestamo>();
         PreparedStatement ps = null;
-        ResultSet rs =null;
-        try{
-            
+        ResultSet rs = null;
+        try {
+
             String consulta = "SELECT * FROM prestamos";
             ps = conexion.prepareStatement(consulta);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 //int idLibro = rs.getInt("id_libro");
-                
+
                 Date fechaPres = rs.getDate("fecha_prestamo");
                 Date fechaDev = rs.getDate("fecha_limite_devolucion");
-                
+
                 Prestamo prestamo = new Prestamo(fechaPres, fechaDev);
                 listaPrestamos.add(prestamo);
             }
-        }catch(SQLException ex){
-            System.err.println("ERROR AL LISTAR LOS LIBROS: " +ex.getMessage());
+        } catch (SQLException ex) {
+            System.err.println("ERROR AL LISTAR LOS LIBROS: " + ex.getMessage());
         } finally {
             if (ps != null) {
                 try {
@@ -777,15 +764,15 @@ public class DML {
         }
         return listaPrestamos;
     }
-    
-    public int insertarUsuarioArchivo(String ruta){
+
+    public int insertarUsuarioArchivo(String ruta) {
         ConversorCSV conversor = new ConversorCSV();
         int numeroFilas = conversor.obtenerNumeroFilas(ruta);
         String[][] tabla = conversor.conversorCSV(ruta, numeroFilas);
         PreparedStatement ps = null;
-        
+
         int filasInsertadas = 0;
-        try{
+        try {
             String consulta = "INSERT INTO usuarios(nombre_usuario,email,tipo_usuario,telefono) VALUES (?,?,?,?)";
             ps = conexion.prepareStatement(consulta);
             for (String[] fila : tabla) {
@@ -793,11 +780,11 @@ public class DML {
                 ps.setString(2, fila[1]);
                 ps.setString(3, fila[2]);
                 ps.setInt(4, Integer.parseInt(fila[3]));
-                
-        }
-        }catch(SQLException ex){
+
+            }
+        } catch (SQLException ex) {
             System.err.println("ERROR AL INSERTAR");
-        }finally {
+        } finally {
             if (ps != null) {
                 try {
                     ps.close();
@@ -808,7 +795,7 @@ public class DML {
         }
         return filasInsertadas;
     }
-    
+
     public Libro obtenerDatosLibro(String nombreLibro) {
         Libro libro = new Libro();
         PreparedStatement ps = null;
@@ -825,9 +812,9 @@ public class DML {
                 String titulo_libro = rs.getString("titulo_libro");
                 String autor = rs.getString("autor");
                 String genero = rs.getString("genero");
-                 int año_publicacion = rs.getInt("año_publicacion");
+                int año_publicacion = rs.getInt("año_publicacion");
 
-                libro = new Libro(id_libro,titulo_libro, autor, genero, año_publicacion);
+                libro = new Libro(id_libro, titulo_libro, autor, genero, año_publicacion);
                 System.out.println("libro encontrado");
             }
         } catch (SQLException ex) {
@@ -852,8 +839,8 @@ public class DML {
         return libro;
         //ok
     }
-    
-        public Usuario obtenerDatosUsuario(String nombreUsuario) {
+
+    public Usuario obtenerDatosUsuario(String nombreUsuario) {
         Usuario usuario = new Usuario();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -869,9 +856,9 @@ public class DML {
                 String nombre_usuario = rs.getString("nombre_usuario");
                 String email = rs.getString("email");
                 String tipo_usuario = rs.getString("tipo_usuario");
-                 int telefono = rs.getInt("telefono");
+                int telefono = rs.getInt("telefono");
 
-                usuario = new Usuario(id_usuario,nombre_usuario, email, tipo_usuario, telefono);
+                usuario = new Usuario(id_usuario, nombre_usuario, email, tipo_usuario, telefono);
                 System.out.println("usuario encontrado");
             }
         } catch (SQLException ex) {
@@ -896,4 +883,85 @@ public class DML {
         return usuario;
         //ok
     }
+
+    public int numeroTipo(String tipo) {
+        int cont = 0;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            String consulta = "SELECT COUNT(*) as total FROM usuarios WHERE tipo_usuario = ?";
+            ps = conexion.prepareStatement(consulta);
+            ps.setString(1, tipo);
+            rs = ps.executeQuery();
+
+            //Comprobamos que rs tenga parametros de comprobacion.
+            if (rs.next()) {
+                cont = rs.getInt("total");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar: " + ex.getMessage());
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (Exception e) {
+                    System.err.println("Error al intentar cerra PreparedStatement: " + e.getMessage());
+                }
+            }
+
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (Exception e) {
+                    System.err.println("Error al intentar cerra ResultSet: " + e.getMessage());
+                }
+            }
+        }
+        return cont;
+        //ok
+    }
+
+    public Evento obtenerDatosEvento(String nombreEvento) {
+        Evento eventoObject = new Evento();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            String consulta = "SELECT * FROM eventos WHERE evento = ?";
+            ps = conexion.prepareStatement(consulta);
+            ps.setString(1, nombreEvento);
+            rs = ps.executeQuery();
+
+            //Comprobamos que rs tenga parametros de comprobacion.
+            if (rs.next()) {
+                int id_evento = rs.getInt("id_evento");
+                String evento = rs.getString("evento");
+                Date fecha_evento = rs.getDate("fecha_evento");
+                String descripcion = rs.getString("descripcion");
+
+                eventoObject = new Evento(id_evento, evento, fecha_evento,descripcion);
+                System.out.println("libro encontrado");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar: " + ex.getMessage());
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (Exception e) {
+                    System.err.println("Error al intentar cerra PreparedStatement: " + e.getMessage());
+                }
+            }
+
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (Exception e) {
+                    System.err.println("Error al intentar cerra ResultSet: " + e.getMessage());
+                }
+            }
+        }
+        return eventoObject;
+        //ok
+    }
+
 }

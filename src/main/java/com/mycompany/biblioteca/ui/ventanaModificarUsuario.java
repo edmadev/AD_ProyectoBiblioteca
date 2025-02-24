@@ -154,7 +154,7 @@ public class ventanaModificarUsuario extends javax.swing.JPanel {
         usuarioNuevo.setEmail(tfEmail.getText());
         usuarioNuevo.setTipo(cbTipoUsuario.getSelectedItem().toString());
         usuarioNuevo.setTelefono(tfno);
-        ;
+        
 
         if (consultasMongoDB.actualizarUsuario(tfNombre.getText(), tfEmail.getText(), cbTipoUsuario.getSelectedItem().toString(), tfno)) {
             JOptionPane.showMessageDialog(null, "Exito al actualizar Usuario con mongodb");

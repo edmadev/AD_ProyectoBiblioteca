@@ -6,6 +6,7 @@ package com.mycompany.biblioteca.ui;
 
 import com.mycompany.biblioteca.DAO.relacional.DML;
 import com.mycompany.biblioteca.models.Libro;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,6 +19,7 @@ public class ventanaModificarLibro extends javax.swing.JPanel {
      */
     DML dml = new DML();
     Libro libro = new Libro();
+
     public ventanaModificarLibro() {
         initComponents();
     }
@@ -141,20 +143,27 @@ public class ventanaModificarLibro extends javax.swing.JPanel {
 
     private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
         // TODO add your handling code here:
-        int año = (int)spnAño.getValue();
+        int año = (int) spnAño.getValue();
         dml.actualizarLibro(tfTitulo.getText(), tfAutor.getText(), tfGenero.getText(), año);
-        
-        
+
+
     }//GEN-LAST:event_btnModificarMouseClicked
 
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
-      libro =  dml.obtenerDatosLibro(tfBuscar.getText());
-        
-        System.out.println(libro.toString());
-      tfTitulo.setText(libro.getTitulo());
-      tfAutor.setText(libro.getAutor());
-      tfGenero.setText(libro.getAutor());
-      spnAño.setValue(libro.getAño());
+            libro = dml.obtenerDatosLibro(tfBuscar.getText());
+
+        if (libro.getTitulo() != null) {
+
+            System.out.println(libro.toString());
+            tfTitulo.setText(libro.getTitulo());
+            tfAutor.setText(libro.getAutor());
+            tfGenero.setText(libro.getAutor());
+            spnAño.setValue(libro.getAño());
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encuentra registro con titulo " + libro.getTitulo());
+
+        }
+
     }//GEN-LAST:event_btnBuscarMouseClicked
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
