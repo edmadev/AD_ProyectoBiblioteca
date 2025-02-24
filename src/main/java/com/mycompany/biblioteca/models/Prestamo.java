@@ -5,6 +5,7 @@
 package com.mycompany.biblioteca.models;
 
 import java.sql.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -21,9 +22,17 @@ public class Prestamo {
     public Prestamo(Date fechaPrestamo, Date fechaLimiteDevolucion) {
         this.fechaPrestamo = fechaPrestamo;
         this.fechaLimiteDevolucion = fechaLimiteDevolucion;
-        this.multa = 0;
+        long diferencia = fechaLimiteDevolucion.getTime()-fechaPrestamo.getTime();
+        double diferenciaDias = TimeUnit.MILLISECONDS.toDays(diferencia);
+        if(diferenciaDias<0){
+            multa = diferenciaDias*2;
+        }else{
+            multa =0;
+        }
     }
-
+    public Prestamo(){
+        
+    }
     
     
 

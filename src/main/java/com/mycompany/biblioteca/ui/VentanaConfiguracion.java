@@ -25,6 +25,7 @@ public class VentanaConfiguracion extends javax.swing.JPanel {
     private boolean temaOscuro = false;
     VentanaInsertarPorArchivo insertar = new VentanaInsertarPorArchivo();
     
+    
     /**
      * Creates new form VentanaConfiguracion
      */

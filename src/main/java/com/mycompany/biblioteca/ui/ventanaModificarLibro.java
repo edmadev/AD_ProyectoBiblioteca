@@ -149,8 +149,16 @@ public class ventanaModificarLibro extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnModificarMouseClicked
 
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
-            libro = dml.obtenerDatosLibro(tfBuscar.getText());
+        libro = dml.obtenerDatosLibro(tfBuscar.getText());
 
         if (libro.getTitulo() != null) {
 
@@ -163,16 +171,7 @@ public class ventanaModificarLibro extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "No se encuentra registro con titulo " + libro.getTitulo());
 
         }
-
     }//GEN-LAST:event_btnBuscarMouseClicked
-
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnModificarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

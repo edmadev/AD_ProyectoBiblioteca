@@ -20,6 +20,7 @@ public class VentanaTablas extends javax.swing.JPanel {
     TablaUsuarios TU = new TablaUsuarios();
     TablaEventos TE = new TablaEventos();
     TablaPrestamos TP = new TablaPrestamos();
+    TablaUsuarioEvento TUE = new TablaUsuarioEvento();
     
     public VentanaTablas() {
         initComponents();
@@ -48,6 +49,7 @@ public class VentanaTablas extends javax.swing.JPanel {
         btnPrestamos = new javax.swing.JButton();
         btnEventos = new javax.swing.JButton();
         panelVentana = new javax.swing.JPanel();
+        btnUsuEven = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Seleccione que tabla quiere ver");
@@ -93,6 +95,13 @@ public class VentanaTablas extends javax.swing.JPanel {
             .addGap(0, 320, Short.MAX_VALUE)
         );
 
+        btnUsuEven.setText("Usuarios por Evento");
+        btnUsuEven.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUsuEvenActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -111,7 +120,9 @@ public class VentanaTablas extends javax.swing.JPanel {
                                 .addComponent(btnPrestamos)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnEventos)))
-                        .addGap(282, 282, 282))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnUsuEven)
+                        .addGap(195, 195, 195))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(panelVentana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(97, 97, 97))))
@@ -126,7 +137,8 @@ public class VentanaTablas extends javax.swing.JPanel {
                     .addComponent(btnLibros)
                     .addComponent(btnUsuarios)
                     .addComponent(btnPrestamos)
-                    .addComponent(btnEventos))
+                    .addComponent(btnEventos)
+                    .addComponent(btnUsuEven))
                 .addGap(34, 34, 34)
                 .addComponent(panelVentana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(37, Short.MAX_VALUE))
@@ -154,11 +166,17 @@ public class VentanaTablas extends javax.swing.JPanel {
         iniciarPanel(TE);
     }//GEN-LAST:event_btnEventosActionPerformed
 
+    private void btnUsuEvenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuEvenActionPerformed
+        // TODO add your handling code here:
+        iniciarPanel(TUE);
+    }//GEN-LAST:event_btnUsuEvenActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEventos;
     private javax.swing.JButton btnLibros;
     private javax.swing.JButton btnPrestamos;
+    private javax.swing.JButton btnUsuEven;
     private javax.swing.JButton btnUsuarios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel panelVentana;

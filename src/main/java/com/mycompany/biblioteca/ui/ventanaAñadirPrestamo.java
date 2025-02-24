@@ -183,6 +183,11 @@ public class ventanaAñadirPrestamo extends javax.swing.JPanel {
         
         long diferencia = fecha2.getTime()-fecha1.getTime();
         double diferenciaDias = TimeUnit.MILLISECONDS.toDays(diferencia);
-        multa = diferenciaDias*2;
+        if (diferenciaDias<0){
+            multa = diferenciaDias*2;
+        }else{
+            multa=0;
+        }
+        
     }
 }

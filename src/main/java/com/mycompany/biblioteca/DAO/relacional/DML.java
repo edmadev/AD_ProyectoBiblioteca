@@ -883,6 +883,45 @@ public class DML {
         return usuario;
         //ok
     }
+    public Prestamo obtenerDatosPrestamo(int idPrestamo){
+        Prestamo prestamo = new Prestamo();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try{
+            String consulta = "SELECT * FROM prestamos WHERE id_prestamo=?";
+            ps = conexion.prepareStatement(consulta);
+            ps.setInt(1, idPrestamo);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                
+                Date fechaPres = rs.getDate("fecha_prestamo");
+                Date fechaDev = rs.getDate("fecha_limite_devolución");
+                double multa = rs.getDouble("multa");
+                
+                prestamo = new Prestamo(fechaPres, fechaDev);
+                System.out.println("Prestamo encontrado");
+            }
+        }catch (SQLException ex) {
+            System.out.println("Error al buscar: " + ex.getMessage());
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (Exception e) {
+                    System.err.println("Error al intentar cerra PreparedStatement: " + e.getMessage());
+                }
+            }
+
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (Exception e) {
+                    System.err.println("Error al intentar cerra ResultSet: " + e.getMessage());
+                }
+            }
+        }
+        return prestamo;
+    }
 
     public int numeroTipo(String tipo) {
         int cont = 0;
@@ -939,7 +978,7 @@ public class DML {
                 String descripcion = rs.getString("descripcion");
 
                 eventoObject = new Evento(id_evento, evento, fecha_evento,descripcion);
-                System.out.println("libro encontrado");
+                System.out.println("Evento encontrado");
             }
         } catch (SQLException ex) {
             System.out.println("Error al buscar: " + ex.getMessage());
@@ -963,5 +1002,48 @@ public class DML {
         return eventoObject;
         //ok
     }
+    public ArrayList<Usuario> obtenerParticipantes(String nombreEvento){
+        ArrayList<Usuario>listaUsuarios = new ArrayList<>();
+        
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try{
+            String consulta = "SELECT * FROM usuarios u JOIN participaciones p ON u.id_usuario=p.id_usuario JOIN eventos e ON p.id_evento=e.id_evento WHERE e.evento="+nombreEvento;
+            ps=conexion.prepareStatement(consulta);
+            ps.setString(1, nombreEvento);
+            rs=ps.executeQuery();
+            
+            if (rs.next()) {
+                int id_usuario = rs.getInt("id_usuario");
+                String nombre_usuario = rs.getString("nombre_usuario");
+                String email = rs.getString("email");
+                String tipo_usuario = rs.getString("tipo_usuario");
+                int telefono = rs.getInt("telefono");
+                Usuario usuario = new Usuario(id_usuario, email, email, tipo_usuario, telefono);
+                System.out.println("Usuario encontrado");
+                listaUsuarios.add(usuario);
+            }
+        }catch (SQLException ex) {
+            System.out.println("Error al buscar: " + ex.getMessage());
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (Exception e) {
+                    System.err.println("Error al intentar cerra PreparedStatement: " + e.getMessage());
+                }
+            }
+
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (Exception e) {
+                    System.err.println("Error al intentar cerra ResultSet: " + e.getMessage());
+                }
+            }
+        }
+        return listaUsuarios;
+    }
+    
 
 }

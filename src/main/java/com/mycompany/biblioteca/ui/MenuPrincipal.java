@@ -52,7 +52,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnEventos = new javax.swing.JButton();
         btnConfiguracion = new javax.swing.JButton();
         pnInsertarVentana = new javax.swing.JPanel();
-        btnMultas = new javax.swing.JButton();
         btnTablas = new javax.swing.JButton();
         btnGrafica = new javax.swing.JButton();
 
@@ -109,13 +108,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        btnMultas.setText("Multas");
-        btnMultas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMultasActionPerformed(evt);
-            }
-        });
-
         btnTablas.setText("Tablas");
         btnTablas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,7 +134,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(btnLibros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnEventos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnConfiguracion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnMultas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnTablas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnGrafica, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -164,9 +155,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(btnPrestamos)
                 .addGap(18, 18, 18)
                 .addComponent(btnEventos)
-                .addGap(18, 18, 18)
-                .addComponent(btnMultas)
-                .addGap(18, 18, 18)
+                .addGap(59, 59, 59)
                 .addComponent(btnTablas)
                 .addGap(18, 18, 18)
                 .addComponent(btnGrafica)
@@ -204,10 +193,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         establecerDimensionesPanelExterno(vP);
         insertarVentana(vP);
     }//GEN-LAST:event_btnPrestamosActionPerformed
-
-    private void btnMultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMultasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMultasActionPerformed
 
     private void btnTablasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTablasActionPerformed
         // TODO add your handling code here:
@@ -291,7 +276,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnEventos;
     private javax.swing.JButton btnGrafica;
     private javax.swing.JButton btnLibros;
-    private javax.swing.JButton btnMultas;
     private javax.swing.JButton btnPrestamos;
     private javax.swing.JButton btnTablas;
     private javax.swing.JButton btnUsuarios;

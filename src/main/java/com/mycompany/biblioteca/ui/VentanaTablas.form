@@ -32,7 +32,9 @@
                               <Component id="btnEventos" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="282" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnUsuEven" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="195" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="panelVentana" min="-2" max="-2" attributes="0"/>
@@ -53,6 +55,7 @@
                   <Component id="btnUsuarios" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnPrestamos" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnEventos" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnUsuEven" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Component id="panelVentana" min="-2" max="-2" attributes="0"/>
@@ -122,5 +125,13 @@
         </DimensionLayout>
       </Layout>
     </Container>
+    <Component class="javax.swing.JButton" name="btnUsuEven">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Usuarios por Evento"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUsuEvenActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

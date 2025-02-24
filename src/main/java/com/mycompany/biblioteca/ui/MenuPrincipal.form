@@ -31,7 +31,6 @@
                   <Component id="btnLibros" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnEventos" max="32767" attributes="0"/>
                   <Component id="btnConfiguracion" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnMultas" alignment="1" max="32767" attributes="0"/>
                   <Component id="btnTablas" max="32767" attributes="0"/>
                   <Component id="btnGrafica" alignment="1" max="32767" attributes="0"/>
               </Group>
@@ -57,9 +56,7 @@
               <Component id="btnPrestamos" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnEventos" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btnMultas" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
               <Component id="btnTablas" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnGrafica" min="-2" max="-2" attributes="0"/>
@@ -146,14 +143,6 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Component class="javax.swing.JButton" name="btnMultas">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Multas"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMultasActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="btnTablas">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tablas"/>

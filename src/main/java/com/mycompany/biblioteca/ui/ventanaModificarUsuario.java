@@ -167,18 +167,17 @@ public class ventanaModificarUsuario extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnModificarMouseClicked
 
+    private void cbTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbTipoUsuarioActionPerformed
+
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
         usuario = dml.obtenerDatosUsuario(tfBuscar.getText());
         tfNombre.setText(usuario.getNombre());
         tfEmail.setText(usuario.getEmail());
         spnTfno.setValue(usuario.getTelefono());
 
-
     }//GEN-LAST:event_btnBuscarMouseClicked
-
-    private void cbTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbTipoUsuarioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
