@@ -4,7 +4,12 @@
  */
 package com.mycompany.biblioteca.ui;
 
+import com.mycompany.biblioteca.DAO.db4o.ConsultasDB4O;
+import com.mycompany.biblioteca.DAO.noRelacional.ConsultasMongoDB;
 import com.mycompany.biblioteca.DAO.relacional.DML;
+import com.mycompany.biblioteca.models.Usuario;
+import com.mycompany.biblioteca.utils.Comprobaciones;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +21,10 @@ public class ventanaAñadirUsuario extends javax.swing.JPanel {
      * Creates new form ventanaAñadirUsuario
      */
     DML dml = new DML();
+    ConsultasMongoDB consultasMongoDB = new ConsultasMongoDB();
+    ConsultasDB4O consultasDB4O = new ConsultasDB4O();
+    Usuario usuario = new Usuario();
+
     public ventanaAñadirUsuario() {
         initComponents();
     }
@@ -30,14 +39,14 @@ public class ventanaAñadirUsuario extends javax.swing.JPanel {
     private void initComponents() {
 
         tfNombre = new javax.swing.JTextField();
-        tfAutor = new javax.swing.JTextField();
-        tfGenero = new javax.swing.JTextField();
+        tfEmail = new javax.swing.JTextField();
         lblNombre = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
         lblTipo = new javax.swing.JLabel();
         lblTfno = new javax.swing.JLabel();
         btnAceptar = new javax.swing.JButton();
-        spnNumero = new javax.swing.JSpinner();
+        cbTipoUsuario = new javax.swing.JComboBox<>();
+        tfTelefono = new javax.swing.JTextField();
 
         lblNombre.setText("Nombre");
 
@@ -53,31 +62,41 @@ public class ventanaAñadirUsuario extends javax.swing.JPanel {
                 btnAceptarMouseClicked(evt);
             }
         });
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
-        spnNumero.setModel(new javax.swing.SpinnerNumberModel(0, null, 999999999, 1));
+        cbTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Profesor", "Alumno", "Externo" }));
+        cbTipoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoUsuarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(140, 140, 140)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTipo)
-                    .addComponent(lblNombre)
-                    .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblTfno)
-                    .addComponent(tfAutor)
-                    .addComponent(lblEmail)
-                    .addComponent(spnNumero))
-                .addGap(162, 162, 162))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(295, 295, 295)
                 .addComponent(btnAceptar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(140, 140, 140)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTipo)
+                    .addComponent(lblNombre)
+                    .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tfTelefono)
+                    .addComponent(lblTfno)
+                    .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEmail))
+                .addGap(162, 162, 162))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,42 +108,74 @@ public class ventanaAñadirUsuario extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTipo)
                     .addComponent(lblTfno))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spnNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
+                    .addComponent(tfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addComponent(btnAceptar)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         // TODO add your handling code here:
-        String titulo = tfNombre.getText();
-        String autor = tfAutor.getText();
-        String genero = tfGenero.getText();
-        
-        int numero =(int) spnNumero.getValue();
-        dml.registrarUsuario(titulo, autor, genero,numero);
+
+        String nombre = tfNombre.getText();
+        String email = tfEmail.getText();
+        String tipo = cbTipoUsuario.getSelectedItem().toString();
+        int telefono = Integer.parseInt(tfTelefono.getText());
+
+        usuario.setNombre(nombre);
+        usuario.setEmail(email);
+        usuario.setTipo(tipo);
+        usuario.setTelefono(telefono);
+        if (Comprobaciones.esEmailValido(email) && Comprobaciones.esNombreValido(nombre) && Comprobaciones.esNumeroTelefonoValido(String.valueOf(telefono))) {
+
+            dml.registrarUsuario(nombre, email, tipo, telefono);
+            JOptionPane.showMessageDialog(null, "Exito al registrar Usuario");
+
+            if (consultasMongoDB.insertarUsuario(nombre, email, tipo, telefono)) {
+                JOptionPane.showMessageDialog(null, "Exito al registrar Usuario con mongodb");
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR al registrar Usuario con mongodb");
+            }
+            if (consultasDB4O.insertarUsuario(usuario)) {
+                JOptionPane.showMessageDialog(null, "Exito al registrar Usuario con DB4O");
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR al registrar Usuario con DB4O");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al registrar, revise los campos\nNumero de SOLO 7 Digitos.\nCorreo abcde@fghi.com.\nNombre no puede tener digitos.\nNo puede ser ni nulo ni vacio");
+        }
+
 
     }//GEN-LAST:event_btnAceptarMouseClicked
+
+    private void cbTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbTipoUsuarioActionPerformed
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
+    private javax.swing.JComboBox<String> cbTipoUsuario;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblTfno;
     private javax.swing.JLabel lblTipo;
-    private javax.swing.JSpinner spnNumero;
-    private javax.swing.JTextField tfAutor;
-    private javax.swing.JTextField tfGenero;
+    private javax.swing.JTextField tfEmail;
     private javax.swing.JTextField tfNombre;
+    private javax.swing.JTextField tfTelefono;
     // End of variables declaration//GEN-END:variables
 }

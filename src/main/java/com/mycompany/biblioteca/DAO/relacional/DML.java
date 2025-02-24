@@ -77,6 +77,7 @@ public class DML {
             ps.setString(2, autor);
             ps.setString(3, genero);
             ps.setInt(4, año);
+            ps.setString(5, titulo);
             filas = ps.executeUpdate();
 
             if (filas > 0) {
@@ -174,6 +175,7 @@ public class DML {
             ps.setString(2, email);
             ps.setString(3, tipo);
             ps.setInt(4, telefono);
+            ps.setString(5, nombre);
             filas = ps.executeUpdate();
 
             if (filas > 0) {
@@ -805,5 +807,93 @@ public class DML {
             }
         }
         return filasInsertadas;
+    }
+    
+    public Libro obtenerDatosLibro(String nombreLibro) {
+        Libro libro = new Libro();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            String consulta = "SELECT * FROM libros WHERE titulo_libro = ?";
+            ps = conexion.prepareStatement(consulta);
+            ps.setString(1, nombreLibro);
+            rs = ps.executeQuery();
+
+            //Comprobamos que rs tenga parametros de comprobacion.
+            if (rs.next()) {
+                int id_libro = rs.getInt("id_libro");
+                String titulo_libro = rs.getString("titulo_libro");
+                String autor = rs.getString("autor");
+                String genero = rs.getString("genero");
+                 int año_publicacion = rs.getInt("año_publicacion");
+
+                libro = new Libro(id_libro,titulo_libro, autor, genero, año_publicacion);
+                System.out.println("libro encontrado");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar: " + ex.getMessage());
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (Exception e) {
+                    System.err.println("Error al intentar cerra PreparedStatement: " + e.getMessage());
+                }
+            }
+
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (Exception e) {
+                    System.err.println("Error al intentar cerra ResultSet: " + e.getMessage());
+                }
+            }
+        }
+        return libro;
+        //ok
+    }
+    
+        public Usuario obtenerDatosUsuario(String nombreUsuario) {
+        Usuario usuario = new Usuario();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            String consulta = "SELECT * FROM usuarios WHERE nombre_usuario = ?";
+            ps = conexion.prepareStatement(consulta);
+            ps.setString(1, nombreUsuario);
+            rs = ps.executeQuery();
+
+            //Comprobamos que rs tenga parametros de comprobacion.
+            if (rs.next()) {
+                int id_usuario = rs.getInt("id_usuario");
+                String nombre_usuario = rs.getString("nombre_usuario");
+                String email = rs.getString("email");
+                String tipo_usuario = rs.getString("tipo_usuario");
+                 int telefono = rs.getInt("telefono");
+
+                usuario = new Usuario(id_usuario,nombre_usuario, email, tipo_usuario, telefono);
+                System.out.println("usuario encontrado");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar: " + ex.getMessage());
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (Exception e) {
+                    System.err.println("Error al intentar cerra PreparedStatement: " + e.getMessage());
+                }
+            }
+
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (Exception e) {
+                    System.err.println("Error al intentar cerra ResultSet: " + e.getMessage());
+                }
+            }
+        }
+        return usuario;
+        //ok
     }
 }

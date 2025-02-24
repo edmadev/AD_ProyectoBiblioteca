@@ -4,7 +4,15 @@
  */
 package com.mycompany.biblioteca.ui;
 
+import com.mycompany.biblioteca.DAO.db4o.ConsultasDB4O;
+import com.mycompany.biblioteca.DAO.noRelacional.ConsultasMongoDB;
 import com.mycompany.biblioteca.DAO.relacional.DML;
+import com.mycompany.biblioteca.models.Usuario;
+import java.awt.LayoutManager;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -16,6 +24,23 @@ public class ventanaEliminarUsuario extends javax.swing.JPanel {
      * Creates new form ventanaEliminarUsuario
      */
     DML dml = new DML();
+    ConsultasMongoDB consultasMongoDB = new ConsultasMongoDB();
+    ConsultasDB4O consultasDB4O = new ConsultasDB4O();
+    Usuario usuario = new Usuario();
+
+    public ventanaEliminarUsuario(JButton btnBorrar, JLabel jLabel1, JTextField tfNombre, LayoutManager layout) {
+        super(layout);
+        this.btnBorrar = btnBorrar;
+        this.jLabel1 = jLabel1;
+        this.tfNombre = tfNombre;
+    }
+
+    public ventanaEliminarUsuario(JButton btnBorrar, JLabel jLabel1, JTextField tfNombre) {
+        this.btnBorrar = btnBorrar;
+        this.jLabel1 = jLabel1;
+        this.tfNombre = tfNombre;
+    }
+
     public ventanaEliminarUsuario() {
         initComponents();
     }
@@ -40,6 +65,11 @@ public class ventanaEliminarUsuario extends javax.swing.JPanel {
         btnBorrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnBorrarMouseClicked(evt);
+            }
+        });
+        btnBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarActionPerformed(evt);
             }
         });
 
@@ -76,7 +106,21 @@ public class ventanaEliminarUsuario extends javax.swing.JPanel {
     private void btnBorrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBorrarMouseClicked
         // TODO add your handling code here:
         dml.eliminarUsuario(tfNombre.getText());
+
+        if (consultasMongoDB.borrarUsuario(tfNombre.getText())) {
+            JOptionPane.showMessageDialog(null, "Exito al borrar Usuario con mongodb");
+
+        }
+         if (consultasDB4O.borrarUsuario(tfNombre.getText())) {
+            JOptionPane.showMessageDialog(null, "Exito al borrar Usuario con DB4O");
+
+        }
+        
     }//GEN-LAST:event_btnBorrarMouseClicked
+
+    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBorrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

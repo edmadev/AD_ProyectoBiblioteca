@@ -5,8 +5,10 @@
 package com.mycompany.biblioteca.ui;
 
 import com.mycompany.biblioteca.DAO.relacional.DML;
+import com.mycompany.biblioteca.utils.Comprobaciones;
 import java.sql.Date;
 import java.time.LocalDate;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -97,8 +99,12 @@ public class ventanaAñadirEvento extends javax.swing.JPanel {
         LocalDate lDate = LocalDate.parse(tfFecha.getText());
         Date fecha = Date.valueOf(lDate);
         String descripcion = tfDescripcion.getText();
-        
-        dml.registrarEvento(nombre, fecha, descripcion);
+        if (Comprobaciones.esNombreValido(nombre) && Comprobaciones.esNombreValido(descripcion) && fecha!=null ){
+                    dml.registrarEvento(nombre, fecha, descripcion);
+         JOptionPane.showMessageDialog(null, "Exito al registrar Evento");
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al registrar, revise campos vacios o nulos");
+        }
 
     }//GEN-LAST:event_btnAceptarMouseClicked
 

@@ -5,7 +5,13 @@
 package com.mycompany.biblioteca.ui;
 
 import java.awt.BorderLayout;
+import static java.awt.image.ImageObserver.WIDTH;
 import javax.swing.JPanel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultKeyedValuesDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -21,6 +27,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     VentanaPrestamos vP = new VentanaPrestamos();
     VentanaEventos vE = new VentanaEventos();
     VentanaTablas vT = new VentanaTablas();
+        DefaultPieDataset dataset = new DefaultKeyedValuesDataset();
+
     VentanaConfiguracion vConfiguracion = new VentanaConfiguracion();
 
     public MenuPrincipal() {
@@ -45,6 +53,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pnInsertarVentana = new javax.swing.JPanel();
         btnMultas = new javax.swing.JButton();
         btnTablas = new javax.swing.JButton();
+        btnGrafica = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,6 +122,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnGrafica.setText("Gráfica de Usuarios");
+        btnGrafica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGraficaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -126,7 +142,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(btnEventos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnConfiguracion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnMultas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTablas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnTablas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGrafica, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnInsertarVentana, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -150,7 +167,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(btnMultas)
                 .addGap(18, 18, 18)
                 .addComponent(btnTablas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnGrafica)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
                 .addComponent(btnConfiguracion)
                 .addGap(16, 16, 16))
             .addGroup(layout.createSequentialGroup()
@@ -201,6 +220,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         insertarVentana(vConfiguracion);
     }//GEN-LAST:event_btnConfiguracionActionPerformed
 
+    private void btnGraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficaActionPerformed
+       cargarGrafica();
+    }//GEN-LAST:event_btnGraficaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -249,11 +272,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
         panel.setSize(900, 480);
         panel.setLocation(0, 0);
     }
+    
+    private void cargarGrafica() {
+        dataset.setValue("Estudiante", Double.valueOf(10));
+        dataset.setValue("Profesor", Double.valueOf(1));
+        dataset.setValue("Externo", Double.valueOf(1));
+        JFreeChart chart = ChartFactory.createPieChart("Distribución de usuarios", dataset, true, true, true);
+        ChartFrame frame = new ChartFrame("Distribución de usuarios", chart);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfiguracion;
     private javax.swing.JButton btnEventos;
+    private javax.swing.JButton btnGrafica;
     private javax.swing.JButton btnLibros;
     private javax.swing.JButton btnMultas;
     private javax.swing.JButton btnPrestamos;

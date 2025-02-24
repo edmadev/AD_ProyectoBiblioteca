@@ -33,7 +33,7 @@ public class ConsultasMongoDB {
         this.coleccion = dataBase.getCollection("usuarios");
     }
 
-    public void insertarUsuario(String nombreUsuario, String email, String tipoUsuario, int telefono) {
+    public boolean insertarUsuario(String nombreUsuario, String email, String tipoUsuario, int telefono) {
         try {
             Document usuarioDoc = new Document("nombreUsuario", nombreUsuario)
                     .append("email", email)
@@ -41,8 +41,10 @@ public class ConsultasMongoDB {
                     .append("telefono", telefono);
             coleccion.insertOne(usuarioDoc);
             System.out.println("MongoDB-> Usuario insertado: " + usuarioDoc.toJson());
+            return true;
         } catch (Exception e) {
             System.err.println("MongoDB-> Error al intentar insertar usuario");
+            return false;
         }
 
     }

@@ -5,6 +5,7 @@
 package com.mycompany.biblioteca.ui;
 
 import com.mycompany.biblioteca.DAO.relacional.DML;
+import com.mycompany.biblioteca.models.Libro;
 
 /**
  *
@@ -16,7 +17,7 @@ public class ventanaModificarLibro extends javax.swing.JPanel {
      * Creates new form ventanaModificarLibro
      */
     DML dml = new DML();
-    
+    Libro libro = new Libro();
     public ventanaModificarLibro() {
         initComponents();
     }
@@ -51,6 +52,11 @@ public class ventanaModificarLibro extends javax.swing.JPanel {
                 btnBuscarMouseClicked(evt);
             }
         });
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         lblTitulo.setText("Titulo");
 
@@ -64,6 +70,11 @@ public class ventanaModificarLibro extends javax.swing.JPanel {
         btnModificar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnModificarMouseClicked(evt);
+            }
+        });
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
             }
         });
 
@@ -132,12 +143,27 @@ public class ventanaModificarLibro extends javax.swing.JPanel {
         // TODO add your handling code here:
         int año = (int)spnAño.getValue();
         dml.actualizarLibro(tfTitulo.getText(), tfAutor.getText(), tfGenero.getText(), año);
+        
+        
     }//GEN-LAST:event_btnModificarMouseClicked
 
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
-        // TODO add your handling code here:
-        //Buscar datos libro
+      libro =  dml.obtenerDatosLibro(tfBuscar.getText());
+        
+        System.out.println(libro.toString());
+      tfTitulo.setText(libro.getTitulo());
+      tfAutor.setText(libro.getAutor());
+      tfGenero.setText(libro.getAutor());
+      spnAño.setValue(libro.getAño());
     }//GEN-LAST:event_btnBuscarMouseClicked
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnModificarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

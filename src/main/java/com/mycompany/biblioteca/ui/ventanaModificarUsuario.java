@@ -4,7 +4,11 @@
  */
 package com.mycompany.biblioteca.ui;
 
+import com.mycompany.biblioteca.DAO.db4o.ConsultasDB4O;
+import com.mycompany.biblioteca.DAO.noRelacional.ConsultasMongoDB;
 import com.mycompany.biblioteca.DAO.relacional.DML;
+import com.mycompany.biblioteca.models.Usuario;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +20,11 @@ public class ventanaModificarUsuario extends javax.swing.JPanel {
      * Creates new form ventanaModificarUsuario
      */
     DML dml = new DML();
+    ConsultasMongoDB consultasMongoDB = new ConsultasMongoDB();
+    ConsultasDB4O consultasDB4O = new ConsultasDB4O();
+    Usuario usuario = new Usuario();
+    Usuario usuarioNuevo = new Usuario();
+
     public ventanaModificarUsuario() {
         initComponents();
     }
@@ -37,10 +46,10 @@ public class ventanaModificarUsuario extends javax.swing.JPanel {
         btnBuscar = new javax.swing.JButton();
         tfNombre = new javax.swing.JTextField();
         tfEmail = new javax.swing.JTextField();
-        tfTipo = new javax.swing.JTextField();
         spnTfno = new javax.swing.JSpinner();
         lblNombre = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
+        cbTipoUsuario = new javax.swing.JComboBox<>();
 
         lblTipo.setText("Tipo de Usuario");
 
@@ -66,6 +75,13 @@ public class ventanaModificarUsuario extends javax.swing.JPanel {
 
         lblEmail.setText("Email");
 
+        cbTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Profesor", "Alumno", "Externo" }));
+        cbTipoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoUsuarioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,21 +95,22 @@ public class ventanaModificarUsuario extends javax.swing.JPanel {
                             .addComponent(tfBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnBuscar)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(181, 181, 181)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblNombre)
-                            .addComponent(tfTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTipo))
+                        .addGap(276, 276, 276)
+                        .addComponent(btnModificar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(169, 169, 169)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblNombre)
+                                .addComponent(lblTipo)))
                         .addGap(57, 57, 57)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblEmail)
                             .addComponent(tfEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                             .addComponent(lblTfno)
-                            .addComponent(spnTfno)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(276, 276, 276)
-                        .addComponent(btnModificar)))
+                            .addComponent(spnTfno))))
                 .addContainerGap(262, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -106,42 +123,68 @@ public class ventanaModificarUsuario extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBuscar)
                 .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNombre)
-                    .addComponent(lblEmail))
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTipo)
-                    .addComponent(lblTfno))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spnTfno, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNombre)
+                            .addComponent(lblEmail))
+                        .addGap(4, 4, 4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTipo)
+                            .addComponent(lblTfno))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(spnTfno, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
                 .addComponent(btnModificar)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
         // TODO add your handling code here:
-        int tfno = (int)spnTfno.getValue();
-        dml.actualizarUsuario(tfNombre.getText(), tfEmail.getText(), tfTipo.getText(), tfno);
+        int tfno = (int) spnTfno.getValue();
+        dml.actualizarUsuario(tfNombre.getText(), tfEmail.getText(), cbTipoUsuario.getSelectedItem().toString(), tfno);
+
+        usuarioNuevo.setNombre(tfNombre.getText());
+        usuarioNuevo.setEmail(tfEmail.getText());
+        usuarioNuevo.setTipo(cbTipoUsuario.getSelectedItem().toString());
+        usuarioNuevo.setTelefono(tfno);
+        ;
+
+        if (consultasMongoDB.actualizarUsuario(tfNombre.getText(), tfEmail.getText(), cbTipoUsuario.getSelectedItem().toString(), tfno)) {
+            JOptionPane.showMessageDialog(null, "Exito al actualizar Usuario con mongodb");
+
+        }
+        if (consultasDB4O.actualizarUsuario(tfBuscar.getText(), usuarioNuevo)) {
+            JOptionPane.showMessageDialog(null, "Exito al actualizar Usuario con DB4O");
+
+        }
+
     }//GEN-LAST:event_btnModificarMouseClicked
 
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
-        // TODO add your handling code here:
-        //Buscar datos Usuario
+        usuario = dml.obtenerDatosUsuario(tfBuscar.getText());
+        tfNombre.setText(usuario.getNombre());
+        tfEmail.setText(usuario.getEmail());
+        spnTfno.setValue(usuario.getTelefono());
+
+
     }//GEN-LAST:event_btnBuscarMouseClicked
+
+    private void cbTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbTipoUsuarioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JComboBox<String> cbTipoUsuario;
     private javax.swing.JLabel lblBuscar;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblNombre;
@@ -151,6 +194,5 @@ public class ventanaModificarUsuario extends javax.swing.JPanel {
     private javax.swing.JTextField tfBuscar;
     private javax.swing.JTextField tfEmail;
     private javax.swing.JTextField tfNombre;
-    private javax.swing.JTextField tfTipo;
     // End of variables declaration//GEN-END:variables
 }
